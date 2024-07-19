@@ -1,20 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetRestaurantByIdQuery } from '../context/getRestaurantsApi'; // Adjust the import path as necessary
+import { useGetRestaurantByIdMutation } from '../context/getRestaurantsApi'; // Adjust the import path as necessary
 import star from '../img/sta (2).png';
 import { CDN_URL } from './config';
 
 const SpecificRes = () => {
   const { id } = useParams();
-  const { data: restaurant, isLoading, error } = useGetRestaurantByIdQuery(id);
+  const [ getRestaurantById, {  isLoading, isError }] = useGetRestaurantByIdMutation();
+  const [restaurant, setRestaurant] = useState(null);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
-  if (error) {
-    return <div>Error fetching data</div>;
-  }
+  useEffect(()=>{
+   const getRestaurant=async()=>{ 
+    try {
+      const result = await getRestaurantById(id).unwrap();
+      setRestaurant(result);
+  } catch (error) {
+      console.error('Failed to fetch restaurants:', error);
+  } 
+};
+
+getRestaurant();
+
+  }, [getRestaurantById])
+
+
+if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        return <div>Error loading data</div>;
+    }
 
   if (!restaurant) {
     return <div>No data found</div>;

@@ -6,12 +6,12 @@ import { ApiSlice } from "./ApiSlice";
 
 export const RestaurantApiSlice= ApiSlice.injectEndpoints({
     endpoints:(builder)=>({
-        getRestaurants:builder.query({
+        getRestaurants:builder.mutation({
             query:()=>({
                 url: `${BASE_URL}/api/restaurants`
             })
         }),
-        getRestaurantById:builder.query({
+        getRestaurantById:builder.mutation({
             query:(id)=>({
                 url:`${BASE_URL}/api/restaurants/${id}`
             })
@@ -19,4 +19,4 @@ export const RestaurantApiSlice= ApiSlice.injectEndpoints({
     })
 })
 
-export const {useGetRestaurantsQuery, useGetRestaurantByIdQuery}= RestaurantApiSlice;
+export const {useGetRestaurantsMutation, useGetRestaurantByIdMutation}= RestaurantApiSlice;
