@@ -8,13 +8,16 @@ import { Provider } from 'react-redux';
 import { Store } from './context/Store';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Cart from './components/Cart';
-import SpecificRes from './components/SpecificRes.js';
+import SpecificRes from './components/SpecificRes';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppLayout=()=>{
   return(
 <Provider store={Store}>
     <Header />
     <Outlet />
+    <ToastContainer />
     </Provider>
   )
 }

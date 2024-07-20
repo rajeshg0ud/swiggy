@@ -35,14 +35,14 @@ function Restaurants() {
 
     return (
         <div className='max-w-[1240px] flex flex-col justify-center mx-auto'>
-            <h1 className='mt-10 mb-2 font-bold text-2xl ml-11'>
+            <h1 className='mt-10 mb-2 font-bold text-lg md:text-2xl ml-4 md:ml-11'>
                 Restaurants with online food delivery in Hyderabad
             </h1>
 
             <div className='flex flex-wrap'>
                 {data?.map(res => (
                     <Link key={res.info.id} to={`restaurant/${res.info.id}`}>
-                        <div className='m-2 mt-5 ml-10 hover:scale-95 transition-transform duration-300 hover:cursor-pointer'>
+                        <div className='m-2 mt-5 ml-16 md:ml-10 hover:scale-95 transition-transform duration-300 hover:cursor-pointer'>
                             <img
                                 className='h-44 w-64 shadow-md object-cover rounded-xl'
                                 src={CDN_URL + res.info.cloudinaryImageId}
