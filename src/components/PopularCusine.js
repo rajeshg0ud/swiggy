@@ -7,13 +7,22 @@ const PopularCusine = () => {
   useEffect(() => {
     new Splide('.splide', {
       type       : 'loop',
-      perPage    : 7,
+      perPage    : 7, // Default perPage for larger screens
+      breakpoints : {
+        768: { // Tablet
+          perPage : 6,
+        },
+        480: { // Mobile
+          perPage : 5,
+        },
+      },
       autoplay   : false,
       interval   : 5000,
       arrows     : false,
       pagination : false,
     }).mount();
   }, []);
+
 
   return (
     <div className="mt-10 md:mt-4 font-bold text-lg md:text-2xl pb-4 border-b-2 mx-auto max-w-[1240px] flex flex-col">
