@@ -44,7 +44,7 @@ const SpecificRes = () => {
 
   return (
     <div className='flex justify-center'>
-      <div className="mt-28 md:m-36 w-[94%] md:w-2/4">
+      <div className="mt-28 md:m-36 w-[95.6%] md:w-2/4">
         <div className="flex justify-around md:justify-between min-w-96 max-w-3xl mb-7">
           <div>
             <h3 className="font-extrabold text-md md:text-lg">{resInfo.name}</h3>
