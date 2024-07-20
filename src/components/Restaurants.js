@@ -35,7 +35,7 @@ function Restaurants() {
 
     return (
         <div className='max-w-[1240px] flex flex-col justify-center mx-auto'>
-            <h1 className='mt-10 mb-2 font-bold text-lg md:text-2xl ml-4 md:ml-11'>
+            <h1 className=' mt-6 md:mt-10 mb-2 font-bold text-lg md:text-2xl ml-4 md:ml-11'>
             Top restaurant chains in Hyderabad
             </h1>
 
