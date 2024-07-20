@@ -10,7 +10,7 @@ function Header() {
   return (
     <div className=' z-10 fixed w-full top-0 flex justify-center shadow-md md:py-1 bg-white brightness-105  '>
 
-        <div className='flex w-[94%] md:w-[80%]  justify-between items-center  text-slate-700 '>
+        <div className='flex w-[98%] md:w-[80%]  justify-between items-center  text-slate-700 '>
         
         <div className='flex items-center'>
           <div className=' w-6 md:w-[36px]'>
@@ -33,8 +33,8 @@ function Header() {
         </div>
 
         <div className='mx-8 py-2 hidden md:flex hover:text-orange-500 font-medium hover:cursor-pointer'><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/helpcenter-7d90c0.svg"  className='px-2'/> <a>Help</a></div>
-        <div className='mx-2 md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-2'/><a>Sign In </a></div>
-        <div className='mx-2 md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/cart'}><img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg'  className='px-2' />  Cart </Link> </div>
+        <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a>Sign In </a></div>
+        <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/cart'}><img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg'  className='px-1 md:px-2' />  Cart </Link> </div>
       
        </div>
 
