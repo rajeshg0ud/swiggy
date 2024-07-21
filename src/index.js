@@ -11,6 +11,8 @@ import Cart from './components/Cart';
 import SpecificRes from './components/SpecificRes';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 const AppLayout=()=>{
   return(
@@ -36,6 +38,15 @@ const appRoutes= createBrowserRouter([{
   {
     path:'/restaurant/:id',
     element:<SpecificRes />
+  },
+  {
+
+    path:'/login',
+    element:<Login />
+  },
+  {
+    path:'/signup',
+    element:<SignUp />
   }]
 }])
 
