@@ -27,18 +27,20 @@ const saveState=(state)=>{
 
 const initialState={
     restInfo:{},
-    items:[]
+    items:[],
+    address:{}
 }
 
-const persistedState=loadState();
+const persistedState = loadState();
 
-if(persistedState && persistedState.items  && Array.isArray(persistedState.items)){
-    initialState.restInfo= persistedState.restInfo;
-    initialState.items =persistedState.items;
-}
-else{
+if (persistedState) {
+    initialState.restInfo = persistedState.restInfo || {};
+    initialState.items = persistedState.items || [];
+    initialState.address = persistedState.address || {};
+} else {
     saveState(initialState);
 }
+
 
 const CartSlice= createSlice({
     name:'CartSlice',
@@ -114,12 +116,25 @@ const CartSlice= createSlice({
             state.items = items.filter(item => item !== null);
         
             saveState(state);
+        },
+
+        updateAddress:(state, action)=>{
+           
+            state.address={
+                area: action.payload.area,
+                landmark: action.payload.landmark,
+                city:action.payload.city,
+                pincode:action.payload.pincode,
+            }
+            console.log(state.address)
+
+            saveState(state)
         }
         
     }
 })
 
 
-export const {addToCart, removeFromCart}=CartSlice.actions;
+export const {addToCart, removeFromCart, updateAddress}=CartSlice.actions;
 
 export default CartSlice.reducer;
