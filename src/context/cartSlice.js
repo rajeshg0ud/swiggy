@@ -127,9 +127,9 @@ const CartSlice= createSlice({
            
             state.address={
                 area: action.payload.area,
-                landmark: action.payload.landmark,
                 city:action.payload.city,
                 pincode:action.payload.pincode,
+                state: action.payload.state,
             }
             console.log(state.address)
 

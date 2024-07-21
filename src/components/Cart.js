@@ -9,13 +9,13 @@ function Cart() {
   const [isEditing, setIsEditing] = useState(false);
   const [area, setArea] = useState(address?.area || "");
   const [city, setCity] = useState(address?.city || "");
-  const [landmark, setLandmark] = useState(address?.landmark || "");
+  const [state, setState] = useState(address?.state || "");
   const [pincode, setPincode] = useState(address?.pincode || "");
   const dispatch = useDispatch();
 
   const handleAddressChange = () => {
     setIsEditing(false);
-    dispatch(updateAddress({ area, city, landmark, pincode }));
+    dispatch(updateAddress({ area, city, state, pincode }));
   };
 
   const getItemPrice = (price) => {
@@ -44,13 +44,7 @@ function Cart() {
                         className="w-full text-sm p-2 mb-2 border rounded"
                         placeholder="Area"
                       /> 
-                      <input
-                        type="text"
-                        value={landmark}
-                        onChange={(e) => setLandmark(e.target.value)}
-                        className="w-full text-sm p-2 mb-2 border rounded"
-                        placeholder="landmark"
-                      />
+                      
                       <input
                         type="text"
                         value={city}
@@ -64,7 +58,14 @@ function Cart() {
                         value={pincode}
                         onChange={(e) => setPincode(e.target.value)}
                         className="w-full text-sm p-2 mb-2 border rounded"
-                        placeholder="Pincode Code"
+                        placeholder="Pincode"
+                      />
+                      <input
+                        type="text"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        className="w-full text-sm p-2 mb-2 border rounded"
+                        placeholder="state"
                       />
                       <button
                         onClick={handleAddressChange}
@@ -77,7 +78,7 @@ function Cart() {
                     <div className='flex justify-between'>
                       <div>
                         <p className='text-md'>{area}</p>
-                        <p className="text-xs text-gray-600">{city}, {landmark}</p>
+                        <p className="text-xs text-gray-600">{city}, {state}</p>
                         <p className="text-xs text-gray-600">{pincode}</p>
                       </div>
                       <a
