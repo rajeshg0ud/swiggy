@@ -42,9 +42,9 @@ function Restaurants() {
             <div className='flex flex-wrap'>
                 {data?.map(res => (
                     <Link key={res.info.id} to={`restaurant/${res.info.id}`}>
-                        <div className='m-2 mt-5 ml-10 md:ml-10 hover:scale-95 transition-transform duration-300 hover:cursor-pointer'>
+                        <div className='m-2 mt-5 ml-8 md:ml-10 hover:scale-95 transition-transform duration-300 hover:cursor-pointer'>
                             <img
-                                className='h-48 w-72 md:h-44 md:w-64 shadow-md object-cover rounded-xl'
+                                className='h-48 w-[299px] md:h-44 md:w-64 shadow-md object-cover rounded-xl'
                                 src={CDN_URL + res.info.cloudinaryImageId}
                                 alt='restaurant'
                             />

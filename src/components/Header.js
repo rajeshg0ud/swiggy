@@ -10,16 +10,16 @@ function Header() {
   return (
     <div className=' z-10 fixed w-full top-0 flex justify-center shadow-md md:py-1 bg-white brightness-105  '>
 
-        <div className='flex w-[97%] md:w-[80%]  justify-between items-center  text-slate-700 '>
+        <div className='flex w-[97%] md:w-[80%] justify-between items-center  text-slate-700 '>
         
-        <div className='flex items-center'>
+        <div className='px-2 flex items-center'>
           <div className=' w-6 md:w-[36px]'>
             <Link to={'/'}>
             <img src={swiggy} alt='swiggy' className=' w-[33.7px] hover:w-[36px] transition-width duration-500 ease-in-out hover:cursor-pointer'/>
             </Link>
           </div>
 
-          <div className='flex items-center hover:cursor-pointer m-3 md:m-7 my-6 text-sm '>
+          <div className='flex items-center hover:cursor-pointer m-2 md:m-7 my-6 text-sm '>
            <p className=' hover:text-orange-500 border-gray-800 border-b-2 hover:border-orange-500  text-sm md:text-md pb-1 mx-[5px] md:mx-2 font-bold'>Banjara Hills </p> 
            <p className='pr-1 pb-1 text-gray-600 hidden md:block'> Hyderabad, Telangana, India </p>
            <FontAwesomeIcon icon={faAngleDown} className=' text-orange-500'/>

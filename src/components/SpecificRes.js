@@ -45,7 +45,7 @@ const SpecificRes = () => {
   return (
     <div className='flex justify-center'>
       <div className="mt-28 md:m-36 w-[95.6%] md:w-2/4">
-        <div className="flex px-2 justify-between min-w-[370px] max-w-[740px] md:max-w-3xl mb-7">
+        <div className="flex px-2 justify-between min-w-[360px] max-w-[700px] md:max-w-3xl mb-7">
           <div>
             <h3 className="font-extrabold text-md md:text-lg">{resInfo.name}</h3>
             <p>{resInfo.areaName}, {resInfo.city}</p>
