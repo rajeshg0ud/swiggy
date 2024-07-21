@@ -71,7 +71,9 @@ const CartSlice= createSlice({
                 }
             }
             else{
-                state.restInfo={id: action.payload.id,
+                state.restInfo={
+                    id: action.payload.id,
+                    resImageId: action.payload.resImageId,
                     resName: action.payload.resName,
                     area: action.payload.area,
                     city: action.payload.city

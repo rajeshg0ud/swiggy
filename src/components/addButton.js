@@ -11,6 +11,7 @@ function AddButton({ resInfo, value, res }) {
       onClick={() => dispatch(addToCart({
         id: resInfo.id,
         resName: resInfo.name,
+        resImageId: resInfo.cloudinaryImageId,
         area: resInfo.areaName,
         city: resInfo.city,
         itemId: res?.card?.info?.id,
