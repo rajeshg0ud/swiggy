@@ -13,6 +13,7 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import MyOrders from './components/MyOrders';
 
 const AppLayout=()=>{
   return(
@@ -47,6 +48,10 @@ const appRoutes= createBrowserRouter([{
   {
     path:'/signup',
     element:<SignUp />
+  },
+  {
+    path:'/myorders',
+    element:<MyOrders  />
   }]
 }])
 
