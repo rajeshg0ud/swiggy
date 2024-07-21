@@ -1,12 +1,11 @@
 import React from 'react';
 
 function Footer() {
-
   return (
     <footer className="bg-black text-white py-10 mt-12">
-      <div className="container md:mx-auto px-6 lg:px-20  max-w-[1240px] ">
-        <div className="flex flex-wrap md:justify-between">
-          <div className="w-full md:w-1/5 mb-6 md:mb-0">
+      <div className="container mx-auto px-6 lg:px-20 max-w-[1240px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="mb-6 md:mb-0">
             <h3 className="text-md md:text-lg font-bold mb-4">Company</h3>
             <ul>
               <li className="mb-2"><a href="#" className="text-gray-400 hover:text-white">About</a></li>
@@ -17,7 +16,7 @@ function Footer() {
               <li className="mb-2"><a href="#" className="text-gray-400 hover:text-white">Swiggy Genie</a></li>
             </ul>
           </div>
-          <div className="w-full md:w-1/5 mb-6 md:mb-0">
+          <div className="mb-6 md:mb-0">
             <h3 className="text-md md:text-lg font-bold mb-4">Contact us</h3>
             <ul>
               <li className="mb-2"><a href="#" className="text-gray-400 hover:text-white">Help & Support</a></li>
@@ -25,7 +24,7 @@ function Footer() {
               <li className="mb-2"><a href="#" className="text-gray-400 hover:text-white">Ride with us</a></li>
             </ul>
           </div>
-          <div className="w-full md:w-1/5 mb-6 md:mb-0">
+          <div className="mb-6 md:mb-0">
             <h3 className="text-md md:text-lg font-bold mb-4">Legal</h3>
             <ul>
               <li className="mb-2"><a href="#" className="text-gray-400 hover:text-white">Terms & Conditions</a></li>
@@ -34,7 +33,7 @@ function Footer() {
               <li className="mb-2"><a href="#" className="text-gray-400 hover:text-white">Investor Relations</a></li>
             </ul>
           </div>
-          <div className="w-full md:w-1/5 mb-6 md:mb-0">
+          <div className="mb-6 md:mb-0">
             <h3 className="text-md md:text-lg font-bold mb-4">We deliver to:</h3>
             <ul>
               <li className="mb-2"><a href="#" className="text-gray-400 hover:text-white">Bangalore</a></li>
@@ -47,7 +46,6 @@ function Footer() {
             </ul>
           </div>
         </div>
-         
       </div>
     </footer>
   );
