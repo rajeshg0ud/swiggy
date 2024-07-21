@@ -73,7 +73,7 @@ function Cart() {
                         Save
                       </button>
                     </div>
-                  ) : (!address ? (
+                  ) : (address.area ? (
                     <div className='flex justify-between'>
                       <div>
                         <p className='text-md'>{area}</p>
