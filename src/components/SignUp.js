@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSignupMutation } from '../context/userApiSlice';
+import { toast } from 'react-toastify';
 
 function Signup() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSignup = () => {
-    // Handle signup logic
+  const [signup ,{isLoading, isError }]=useSignupMutation();
+  
+  if(isLoading){
+    return <div>...loading</div>  }
+ 
+
+  const handleSignup = async(e) => {
+    e.preventDefault();
+       try{
+          if ( !email || !password) {
+            toast.error("All fields are required!");
+            return;
+          }
+
+        const res=await signup({name, email, password}).unwrap();
+        console.log(res)
+       toast.success('Logged in successfully');
+       }
+       catch(err){
+        toast.error(err);
+       }
+    
   };
 
   return (

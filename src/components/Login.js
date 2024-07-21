@@ -1,13 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLoginMutation } from '../context/userApiSlice';
+import { toast } from 'react-toastify';
 
 function Login() {
-  const [phoneNumber, setPhoneNumber] = useState('');  
+  const [email, setEmail] = useState('');  
   const [password, setPassword] = useState('');
 
+  const [login ,{isLoading, isError }]=useLoginMutation();
 
-  const handleLogin = () => {
-    // Handle login logic
+  
+  if(isLoading){
+    return <div>...loading</div>  }
+ 
+     
+  const handleLogin = async(e) => {
+    e.preventDefault();
+
+       try{
+        if ( !email || !password) {
+          toast.error("All fields are required!");
+          return;
+        }
+        const res=await login({email, password}).unwrap();
+        console.log(res)
+       toast.success('Logged in successfully');
+       }
+       catch(err){
+        toast.error(err);
+       }
   };
 
   return (
@@ -23,8 +44,8 @@ function Login() {
         <div className="mb-4">
           <input
             type="text"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full p-2 py-4  border outline-none "
             placeholder="Email"
           />
