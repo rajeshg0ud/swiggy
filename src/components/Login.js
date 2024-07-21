@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../context/userApiSlice';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUserInfo } from '../context/cartSlice';
 
 function Login() {
   const [email, setEmail] = useState('');  
   const [password, setPassword] = useState('');
-
+  const dispatch=useDispatch();
   const [login ,{isLoading, isError }]=useLoginMutation();
+  const userInfo= useSelector(Store => Store.cartSlice.userInfo)
+  const navigate=useNavigate();
+ 
+    useEffect(()=>{
+      if(userInfo.id){
+        navigate('/')
+      }
+    },[userInfo])
 
-  
   if(isLoading){
     return <div>...loading</div>  }
- 
+
      
   const handleLogin = async(e) => {
     e.preventDefault();
@@ -24,6 +33,7 @@ function Login() {
         }
         const res=await login({email, password}).unwrap();
         console.log(res)
+        dispatch(addUserInfo(res))
        toast.success('Logged in successfully');
        }
        catch(err){

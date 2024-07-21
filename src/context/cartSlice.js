@@ -26,9 +26,10 @@ const saveState=(state)=>{
 }
 
 const initialState={
+    userInfo:{},
     restInfo:{},
     items:[],
-    address:{}
+    address:{},
 }
 
 const persistedState = loadState();
@@ -37,6 +38,8 @@ if (persistedState) {
     initialState.restInfo = persistedState.restInfo || {};
     initialState.items = persistedState.items || [];
     initialState.address = persistedState.address || {};
+    initialState.userInfo = persistedState.userInfo || {};
+
 } else {
     saveState(initialState);
 }
@@ -131,12 +134,22 @@ const CartSlice= createSlice({
             console.log(state.address)
 
             saveState(state)
+        },
+        addUserInfo:(state, action)=>{
+
+            state.userInfo={
+                id: action.payload.id,
+                name: action.payload.name,
+                email: action.payload.email
+            }
+
+            saveState(state)
         }
         
     }
 })
 
 
-export const {addToCart, removeFromCart, updateAddress}=CartSlice.actions;
+export const {addToCart, removeFromCart, updateAddress, addUserInfo}=CartSlice.actions;
 
 export default CartSlice.reducer;

@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSignupMutation } from '../context/userApiSlice';
 import { toast } from 'react-toastify';
+import { addUserInfo } from '../context/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Signup() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-
+  const dispatch=useDispatch();
   const [signup ,{isLoading, isError }]=useSignupMutation();
   
+  const userInfo= useSelector(Store => Store.cartSlice.userInfo)
+  const navigate=useNavigate();
+
+  
+    useEffect(()=>{
+      if(userInfo.id){
+        navigate('/')
+      }
+    },[userInfo])
+
   if(isLoading){
+
     return <div>...loading</div>  }
  
 
@@ -24,6 +37,8 @@ function Signup() {
 
         const res=await signup({name, email, password}).unwrap();
         console.log(res)
+        dispatch(addUserInfo(res))
+
        toast.success('Logged in successfully');
        }
        catch(err){
