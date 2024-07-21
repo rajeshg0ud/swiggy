@@ -65,7 +65,8 @@ function Cart() {
                   Save
                 </button>
               </div>
-            ) : (
+            ) : 
+            (!address ?(
               <div className='flex justify-between'>
                <div>
                <p className='text-md'>{area}</p>
@@ -80,7 +81,22 @@ function Cart() {
                   CHANGE
                 </a>
               </div>
-            )}
+            ): (
+              <div className='flex flex-col md:flex-row items-center md:items-start md:justify-between'>
+               <div className=' flex flex-col items-center'>
+                <img className=' w-44' src='https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_252/NoSavedAddress_ttsdqs' alt='address not found' />
+               <p className='text-md font-medium text-gray-500'>Can't find a door to knock</p>
+               <p className=' text-gray-500 text-xs'>You don't have an address to deliver.</p>
+                </div>
+                <a
+                  href="#"
+                  onClick={() => setIsEditing(true)}
+                  className="text-orange-600 mt-3 md:mt-2 block text-sm font-semibold"
+                >
+                  ADD ADDRESS
+                </a>
+              </div>
+            ))}
           </div>
         </div>
         <div className=' bg-white p-8 shadow-sm'>
