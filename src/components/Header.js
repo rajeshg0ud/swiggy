@@ -12,11 +12,11 @@ import ClipLoader from 'react-spinners/ClipLoader';
 
 function Header() {
 
-  const user= useSelector(Store =>  Store.cartSlice.userInfo)
+  const {userInfo, items}= useSelector(Store =>  Store.cartSlice)
   const [dropdownVisible, setDropdownVisible]=useState(false);
   const dispatch=useDispatch();
   const dropdownRef=useRef(null);
-  const navigate=useNavigate();
+  const length= items?.reduce((total, item) => total + (1) * item?.quantity, 0); 
 
   useEffect(()=>{
     const handleClickOutside=(event)=>{
@@ -83,9 +83,10 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
 
         <div className='mx-8 py-2  hidden md:flex hover:text-orange-500 font-medium hover:cursor-pointer'><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/helpcenter-7d90c0.svg"  className='px-2'/> <a>Help</a></div>
         {
-          user?.name ?        
+          userInfo?.name ?        
            (<div  ref={dropdownRef}>
-           <div className='mx-[6.5px] md:mx-8py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer' onClick={()=> setDropdownVisible(!dropdownVisible)}> <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a> {user.name}</a> </div>
+           <div className='mx-[6.5px] md:mx-8py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer' onClick={()=> setDropdownVisible(!dropdownVisible)}> 
+            <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a className='mt-[1.8px]'> {userInfo?.name}</a> </div>
          {
           dropdownVisible && 
           <div className='absolute text-xs md:text-base top-[74px] md:top-[83px] ml-1 bg-white flex flex-col'>
@@ -97,11 +98,13 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
          } 
          </div>)
          :        
-           <div className='mx-[6.5px] md:mx-8  py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/login'}><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a className='mt-[2px]'> Sign In</a></Link></div>
+           <div className='mx-[6.5px] md:mx-8  py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/login'}>
+            <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a className='mt-[1.8px]'> Sign In</a></Link></div>
 
         }
 
-        <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/cart'}><img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg'  className='px-1 md:px-2' /> <a className='mt-[2px]'>Cart</a>  </Link> </div>
+        <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/cart'}>
+        <img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg'  className='px-1 md:px-2 py-2' /> <a className='mt-[9.4px]'>Cart</a> <a className=' absolute ml-3 md:ml-[14.8px] px-[0.2px] bg-white mt-[1.1px] text-orange-600'>{length}</a>  </Link> </div>
       
        </div>
 
