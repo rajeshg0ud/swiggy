@@ -6,51 +6,58 @@ import { addUserInfo } from '../context/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-
 function Signup() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const dispatch=useDispatch();
-  const [signup ,{isLoading, isError }]=useSignupMutation();
-  
-  const userInfo= useSelector(Store => Store.cartSlice.userInfo)
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const [signup, { isLoading, isError }] = useSignupMutation();
 
-  
-    useEffect(()=>{
-      if(userInfo?.id){
-        navigate('/')
-      }
-    },[userInfo])
+  const userInfo = useSelector(store => store.cartSlice.userInfo);
+  const navigate = useNavigate();
 
-    if (isLoading) return (
-      <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
-          < ClipLoader color="#000000" loading={isLoading} size={50} />
-      </div>
+  useEffect(() => {
+    if (userInfo?.id) {
+      navigate('/');
+    }
+  }, [userInfo]);
+
+  if (isLoading) return (
+    <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
+      <ClipLoader color="#000000" loading={isLoading} size={50} />
+    </div>
   );
 
   if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
- 
 
-  const handleSignup = async(e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-       try{
-          if ( !email || !password) {
-            toast.error("All fields are required!");
-            return;
-          }
 
-        const res=await signup({name, email, password}).unwrap();
-        console.log(res)
-        dispatch(addUserInfo(res))
+    // Email and password validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)/;
 
-       toast.success('Logged in successfully');
-       }
-       catch(err){
-        toast.error(err);
-       }
-    
+    if (!name || !email || !password) {
+      toast.error("All fields are required!");
+      return;
+    }
+    if (!emailPattern.test(email)) {
+      toast.error("Please enter a valid email address!");
+      return;
+    }
+    if (!passwordPattern.test(password)) {
+      toast.error("Password must contain at least one capital letter and one number!");
+      return;
+    }
+
+    try {
+      const res = await signup({ name, email, password }).unwrap();
+      console.log(res);
+      dispatch(addUserInfo(res));
+      toast.success('Account created successfully');
+    } catch (err) {
+      toast.error(err.message || err);
+    }
   };
 
   return (
@@ -60,11 +67,10 @@ function Signup() {
         <p className="text-sm mb-4">
           or{' '}
           <Link to="/login" className="text-orange-500">
-            login in to your account
+            login to your account
           </Link>
         </p>
         <div className="mb-4">
-          
           <input
             type="text"
             value={name}
@@ -80,7 +86,7 @@ function Signup() {
             placeholder="Email"
           />
           <input
-            type="text"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 py-4  border-t-0 border outline-none"
