@@ -7,8 +7,6 @@ import { CDN_URL } from './config';
 function MyOrders() {
     const  { data: orders, isLoading, error } = useGetOrdersQuery();
 
-    console.log(orders)
-
     if (isLoading) return (
         <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
             < ClipLoader color="#36d7b7" loading={isLoading} size={50} />

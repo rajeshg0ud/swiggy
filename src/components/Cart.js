@@ -6,6 +6,8 @@ import { CDN_URL } from './config';
 import { usePlaceOrderMutation } from '../context/orderApiSlice';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 function Cart() {
   const { restInfo, items, address, userInfo } = useSelector((store) => store.cartSlice);
@@ -30,10 +32,18 @@ function Cart() {
 
   const [placeOrder,{isLoading, isError}]=usePlaceOrderMutation();
 
+  if (isLoading) return (
+    <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
+        < ClipLoader color="#000000" loading={isLoading} size={50} />
+    </div>
+);
+
+if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
+
   const totalCartValue= items.reduce((total, item) => total + getItemPrice(item.itemPrice) * item.quantity, 0);
 
   const handleOrder=async()=>{
-    if(userInfo.id){
+    if(userInfo?.id){
       
     if(area && city && state && pincode){
       const res= await placeOrder({

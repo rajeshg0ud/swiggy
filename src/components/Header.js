@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSignoutMutation } from '../context/userApiSlice';
 import { addUserInfo } from '../context/cartSlice';
 import { toast } from 'react-toastify';
-
+import ClipLoader from 'react-spinners/ClipLoader';
 
 function Header() {
 
@@ -35,6 +35,14 @@ function Header() {
 
   const [signout,{isLoading, isError}]=useSignoutMutation();
 
+  if (isLoading) return (
+    <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
+        < ClipLoader color="#000000" loading={isLoading} size={50} />
+    </div>
+);
+
+if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
+
   const handleSignout=async()=>{
     try{
       await signout().unwrap();
@@ -45,6 +53,7 @@ function Header() {
       toast.error(Err)
     }
   }
+
 
 
   return (

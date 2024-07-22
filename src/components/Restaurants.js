@@ -3,6 +3,8 @@ import { useGetRestaurantsMutation } from '../context/getRestaurantsApi';
 import { CDN_URL } from './config';
 import star from '../img/sta (2).png';
 import { Link } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 function Restaurants() {
     const [getRestaurants, { isLoading, isError }] = useGetRestaurantsMutation();
@@ -25,13 +27,13 @@ function Restaurants() {
         getData();
     }, [getRestaurants]);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (isError) {
-        return <div>Error loading data</div>;
-    }
+    if (isLoading) return (
+        <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
+            < ClipLoader color="#000000" loading={isLoading} size={50} />
+        </div>
+    );
+  
+    if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
 
     return (
         <div className='max-w-[1240px] flex flex-col justify-center mx-auto'>

@@ -6,6 +6,7 @@ import { CDN_URL } from './config';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../context/cartSlice';
 import AddButton from './addButton';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const SpecificRes = () => {
   const { id } = useParams();
@@ -28,13 +29,14 @@ const SpecificRes = () => {
     getRestaurant();
   }, [getRestaurantById, id]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return (
+    <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
+        < ClipLoader color="#000000" loading={isLoading} size={50} />
+    </div>
+);
 
-  if (isError) {
-    return <div>Error loading data</div>;
-  }
+if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
+
 
   if (!restaurant) {
     return <div>No data found</div>;

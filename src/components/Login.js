@@ -4,6 +4,8 @@ import { useLoginMutation } from '../context/userApiSlice';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUserInfo } from '../context/cartSlice';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 function Login() {
   const [email, setEmail] = useState('');  
@@ -14,14 +16,18 @@ function Login() {
   const navigate=useNavigate();
  
     useEffect(()=>{
-      if(userInfo.id){
+      if(userInfo?.id){
         navigate('/')
       }
     },[userInfo])
 
-  if(isLoading){
-    return <div>...loading</div>  }
+    if (isLoading) return (
+      <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
+          < ClipLoader color="#000000" loading={isLoading} size={50} />
+      </div>
+  );
 
+  if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
      
   const handleLogin = async(e) => {
     e.preventDefault();
