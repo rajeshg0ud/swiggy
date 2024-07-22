@@ -1,27 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import swiggy from '../assets/swiggy.svg'  
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useSignoutMutation } from '../context/userApiSlice';
+import { addUserInfo } from '../context/cartSlice';
+import { toast } from 'react-toastify';
 
 
 function Header() {
 
   const user= useSelector(Store =>  Store.cartSlice.userInfo)
   const [dropdownVisible, setDropdownVisible]=useState(false);
-
+  const dispatch=useDispatch();
   const dropdownRef=useRef(null);
+  const navigate=useNavigate();
 
   useEffect(()=>{
     const handleClickOutside=(event)=>{
       if(dropdownRef.current && !dropdownRef.current.contains(event.target)){
         setDropdownVisible(false)
       }
-      
     }
-
       document.addEventListener('mousedown', handleClickOutside);
 
       return()=>{
@@ -29,6 +31,20 @@ function Header() {
       }
 
   }, [dropdownRef])
+ 
+
+  const [signout,{isLoading, isError}]=useSignoutMutation();
+
+  const handleSignout=async()=>{
+    try{
+      await signout().unwrap();
+      dispatch(addUserInfo(null))
+      toast.success('Signed out')
+    }
+    catch(Err){
+      toast.error(Err)
+    }
+  }
 
 
   return (
@@ -56,27 +72,27 @@ function Header() {
         <p className='hover:text-orange-500 font-medium hover:cursor-pointer'>Search</p>
         </div>
 
-        <div className='mx-8 py-2 hidden md:flex hover:text-orange-500 font-medium hover:cursor-pointer'><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/helpcenter-7d90c0.svg"  className='px-2'/> <a>Help</a></div>
+        <div className='mx-8 py-2  hidden md:flex hover:text-orange-500 font-medium hover:cursor-pointer'><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/helpcenter-7d90c0.svg"  className='px-2'/> <a>Help</a></div>
         {
-          user.id?        
+          user?.name ?        
            (<div  ref={dropdownRef}>
-           <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer' onClick={()=> setDropdownVisible(!dropdownVisible)}> <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a> {user.name}</a> </div>
+           <div className='mx-[6.5px] md:mx-8py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer' onClick={()=> setDropdownVisible(!dropdownVisible)}> <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a> {user.name}</a> </div>
          {
           dropdownVisible && 
-          <div className='absolute top-[83px] mx-8 bg-white flex flex-col'>
+          <div className='absolute text-xs md:text-base top-[74px] md:top-[83px] ml-1 bg-white flex flex-col'>
             <Link to='/myorders' >
-            <button className=' border p-2 hover:bg-gray-200 shadow-md'>My Orders</button>
+            <button className=' border border-gray-300 p-2 hover:bg-gray-200 shadow-md'>My Orders</button>
             </Link>
-            <button className=' border p-2 hover:bg-gray-200 shadow-md'>Sign Out</button>
+            <button className=' border border-gray-300 p-2 hover:bg-gray-200 shadow-md' onClick={()=>handleSignout()}>Sign Out</button>
           </div>
          } 
          </div>)
          :        
-           <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/login'}><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a> Sign In</a></Link></div>
+           <div className='mx-[6.5px] md:mx-8  py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/login'}><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a className='mt-[2px]'> Sign In</a></Link></div>
 
         }
 
-        <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/cart'}><img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg'  className='px-1 md:px-2' />  Cart </Link> </div>
+        <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/cart'}><img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg'  className='px-1 md:px-2' /> <a className='mt-[2px]'>Cart</a>  </Link> </div>
       
        </div>
 

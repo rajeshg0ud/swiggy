@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToCart, removeFromCart, updateAddress } from '../context/cartSlice'; 
+import { addToCart, clearCart, removeFromCart, updateAddress } from '../context/cartSlice'; 
 import empty_cart from '../assets/empty_cart.webp'
 import { CDN_URL } from './config';
+import { usePlaceOrderMutation } from '../context/orderApiSlice';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 function Cart() {
   const { restInfo, items, address } = useSelector((store) => store.cartSlice);
@@ -24,6 +27,33 @@ function Cart() {
     }
     return 0;
   };
+
+  const [placeOrder,{isLoading, isError}]=usePlaceOrderMutation();
+
+  const totalCartValue= items.reduce((total, item) => total + getItemPrice(item.itemPrice) * item.quantity, 0);
+
+  const handleOrder=async()=>{
+    if(area && city && state && pincode){
+      const res= await placeOrder({
+        restaurantInfo:restInfo,
+        orderItems: items,
+        shippingAddress: {area,city,pincode,state,},
+        paymentMethod: 'COD',
+        itemsPrice:  totalCartValue,
+        charges: 60,
+        shippingprice: 0,
+        totalPrice: totalCartValue+60,
+      }).unwrap();
+
+      console.log(res);
+      
+      toast.success('Order Placed');
+      dispatch(clearCart());
+    }
+    else{
+      toast.error('please add the address')
+    }
+  }
 
   return (
     <div className="mt-[69px] md:mt-[82px] container mx-auto p-4 bg-zinc-100 h-screen">
@@ -109,13 +139,15 @@ function Cart() {
               </div>
               <div className='bg-white p-8 shadow-sm'>
                 <h2 className="text-md font-bold">Choose payment method</h2>
-                <button className="w-full mt-4 p-3 bg-lime-600 brightness-105 font-semibold text-white text-sm md:text-md">PROCEED TO PAY</button>
+                <button className="w-full mt-4 p-3 bg-lime-600 brightness-105 font-semibold text-white text-sm md:text-md" onClick={()=> handleOrder()}>PROCEED TO PAY</button>
               </div>
             </div>
             <div className="w-full lg:w-[24%] bg-white p-6 shadow-sm mt-6 lg:mt-6">
               
               <div className='flex pb-4'>
+              <Link to={`/restaurant/${restInfo?.id}`}>
               <img className='h-16 w-[50px] md:h-12 md:w-14 shadow-md object-cover mr-2' src={CDN_URL + restInfo?.resImageId} alt={`${ restInfo?.resImageId}`} />
+              </Link>
               <div className=' flex flex-col justify-start items-start'>
               <h2 className="text-md font-bold ">{restInfo?.resName}</h2>
               <p className=' text-xs mb-4 text-gray-600'>{restInfo?.area}</p>
@@ -148,7 +180,7 @@ function Cart() {
                 <h3 className="text-xs font-bold">Bill Details</h3>
                 <div className="text-xs flex justify-between mt-2 text-gray-600">
                   <p>Item Total</p>
-                  <p>₹{items.reduce((total, item) => total + getItemPrice(item.itemPrice) * item.quantity, 0)}</p>
+                  <p>₹{totalCartValue}</p>
                 </div>
                 <div className="text-xs flex justify-between mt-2 text-gray-600 border-b py-2">
                   <p>GST and Restaurant Charges</p>
@@ -156,7 +188,7 @@ function Cart() {
                 </div>
                 <div className="text-md flex justify-between font-bold mt-2">
                   <p>To Pay</p>
-                  <p>₹{items.reduce((total, item) => total + getItemPrice(item.itemPrice) * item.quantity, 0) + 60}</p>
+                  <p>₹{totalCartValue + 60}</p>
                 </div>
               </div>
             </div>

@@ -123,6 +123,12 @@ const CartSlice= createSlice({
             saveState(state);
         },
 
+        clearCart:(state)=>{
+            state.items=[]
+
+            saveState(state)
+        },
+
         updateAddress:(state, action)=>{
            
             state.address={
@@ -137,11 +143,7 @@ const CartSlice= createSlice({
         },
         addUserInfo:(state, action)=>{
 
-            state.userInfo={
-                id: action.payload.id,
-                name: action.payload.name,
-                email: action.payload.email
-            }
+            state.userInfo= action.payload;
 
             saveState(state)
         }
@@ -150,6 +152,6 @@ const CartSlice= createSlice({
 })
 
 
-export const {addToCart, removeFromCart, updateAddress, addUserInfo}=CartSlice.actions;
+export const {addToCart, removeFromCart, clearCart, updateAddress, addUserInfo}=CartSlice.actions;
 
 export default CartSlice.reducer;
