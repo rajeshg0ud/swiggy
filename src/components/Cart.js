@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 function Cart() {
-  const { restInfo, items, address } = useSelector((store) => store.cartSlice);
+  const { restInfo, items, address, userInfo } = useSelector((store) => store.cartSlice);
   const [isEditing, setIsEditing] = useState(false);
   const [area, setArea] = useState(address?.area || "");
   const [city, setCity] = useState(address?.city || "");
@@ -33,6 +33,8 @@ function Cart() {
   const totalCartValue= items.reduce((total, item) => total + getItemPrice(item.itemPrice) * item.quantity, 0);
 
   const handleOrder=async()=>{
+    if(userInfo.id){
+      
     if(area && city && state && pincode){
       const res= await placeOrder({
         restaurantInfo:restInfo,
@@ -51,7 +53,11 @@ function Cart() {
       dispatch(clearCart());
     }
     else{
-      toast.error('please add the address')
+      toast.error("You don't have an address to deliver")
+    }
+    }
+    else{
+      toast.error('Log in or signup to place an order')
     }
   }
 
