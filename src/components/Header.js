@@ -104,7 +104,7 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
         }
 
         <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer'><Link className='flex' to={'/cart'}>
-        <img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg'  className='px-1 md:px-2 py-2' /> <a className='mt-[9.4px]'>Cart</a> <a className=' absolute ml-3 md:ml-[14.8px] px-[0.2px]  bg-white mt-[1.1px] text-orange-600'>{length}</a>  </Link> </div>
+        <img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg'  className='px-1 md:px-2 py-2' /> <a className='mt-[9.4px]'>Cart</a> <a className=' absolute ml-3 md:ml-[14.8px] px-[0.2px]  bg-white mt-[0.75px] text-orange-600'>{length}</a>  </Link> </div>
       
        </div>
 

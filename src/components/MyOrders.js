@@ -2,14 +2,14 @@ import React from 'react';
 import { useGetOrdersQuery } from  '../context/orderApiSlice';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { Link } from 'react-router-dom';
-import { CDN_URL } from './config';
+import { CDN_URL } from './config'; 
 
 function MyOrders() {
     const  { data: orders, isLoading, error } = useGetOrdersQuery();
 
     if (isLoading) return (
         <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
-            < ClipLoader color="#36d7b7" loading={isLoading} size={50} />
+            < ClipLoader color="#000000" loading={isLoading} size={50} />
         </div>
     );
 
@@ -23,15 +23,15 @@ function MyOrders() {
                 
                     {orders && orders.map((order, index) => (
                         <div className="flex flex-col md:flex-row p-4 m-[8px] my-5 border" key={index}>
-                            <div className="flex flex-col w-[71%]">
+                            <div className="flex flex-col md:w-[71%]">
                                 <div className="border-b p-4 mb-4">
                                    
-                                   <div className='flex'>
+                                   <div className='flex w-full'>
                                     <Link to={`/restaurant/${order.restaurantInfo?.id}`}>
-                                   <img className='h-16 w-[50px] md:h-20 md:w-28 mb-3 shadow-md object-cover mr-2' src={CDN_URL + order.restaurantInfo?.resImageId} alt={`${ order.restaurantInfo?.resImageId}`} />
+                                   <img className='h-16 w-[50px] md:h-20 md:w-28 mb-3 shadow-md object-cover mr-4' src={CDN_URL + order.restaurantInfo?.resImageId} alt={`${ order.restaurantInfo?.resImageId}`} />
                                    </Link>
                                    <div>
-                                   <h2 className="text-xl font-bold ">{order.restaurantInfo?.resName}</h2>
+                                   <h2 className="text-base md:text-xl font-bold ">{order.restaurantInfo?.resName}</h2>
                                    <p className=' text-sm mb-4 text-gray-600'>{order.restaurantInfo?.area}</p>
                                    </div>
                                     </div>

@@ -11,7 +11,7 @@ function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
-  const [signup, { isLoading, isError }] = useSignupMutation();
+  const [signup, { isLoading }] = useSignupMutation();
 
   const userInfo = useSelector(store => store.cartSlice.userInfo);
   const navigate = useNavigate();
@@ -20,27 +20,25 @@ function Signup() {
     if (userInfo?.id) {
       navigate('/');
     }
-  }, [userInfo]);
+  }, [userInfo, navigate]);
 
   if (isLoading) return (
     <div className="self-center flex justify-center m-[6px] items-center text-3xl font-semibold">
       <ClipLoader color="#000000" loading={isLoading} size={50} />
     </div>
   );
-
-  if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
+ 
 
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Email and password validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern = /^(?=.*[A-Z])(?=.*\d)/;
 
     if (!name || !email || !password) {
       toast.error("All fields are required!");
       return;
-    }
+    } 
     if (!emailPattern.test(email)) {
       toast.error("Please enter a valid email address!");
       return;
@@ -56,7 +54,7 @@ function Signup() {
       dispatch(addUserInfo(res));
       toast.success('Account created successfully');
     } catch (err) {
-      toast.error(err.message || err);
+      toast.error(err.message || "Invalid Credentials");
     }
   };
 
