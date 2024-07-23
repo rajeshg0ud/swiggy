@@ -55,7 +55,7 @@ const appRoutes= createBrowserRouter([{
     element:<MyOrders  />
   },
   {
-    path:'/search/:keyword',
+    path:'/search',
     element:<Search  />
   }]
 }])

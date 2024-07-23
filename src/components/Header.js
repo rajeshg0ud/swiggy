@@ -75,18 +75,18 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
             </Link>
           </div>
 
-          <div className='flex items-center hover:cursor-pointer m-2 md:m-7 my-6 text-sm '>
+          <div className=' items-center hover:cursor-pointer m-2 md:m-7 my-6 text-sm hidden md:flex'>
            <p className=' hover:text-orange-500 border-gray-800 border-b-2 hover:border-orange-500  text-sm md:text-md pb-1 mx-[5px] md:mx-2 font-bold'>Banjara Hills </p> 
-           <p className='pr-1 pb-1 text-gray-600 hidden md:block'> Hyderabad, Telangana, India </p>
+           <p className='pr-1 pb-1 text-gray-600 md:block'> Hyderabad, Telangana, India </p>
            <FontAwesomeIcon icon={faAngleDown} className=' text-orange-500'/>
           </div>
         </div>
 
        <div className=' items-center flex'>
-       <div className=' hidden md:flex mx-8 py-2'>
-        <Link to={'/search/:keyword'} className='flex'>
+       <div className='  md:flex mx-[6.5px] md:mx-8 py-2 text-sm md:text-md '>
+        <Link to={'/search'} className='flex'>
         <FontAwesomeIcon className='p-1 px-2 ' icon={faSearch} />  
-        <p className='hover:text-orange-500 font-medium hover:cursor-pointer'>Search</p>
+        <p className='hover:text-orange-500 font-medium hover:cursor-pointer mt-[1px]'>Search</p>
         </Link>
         </div>
 
@@ -104,7 +104,7 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
         {
           userInfo?.name ?        
            (<div  ref={dropdownRef}>
-           <div className='mx-[6.5px] md:mx-8py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer' onClick={()=> setDropdownVisible(!dropdownVisible)}> 
+           <div className='mx-[6.5px] md:mx-8 py-2 flex  hover:text-orange-500 text-sm md:text-md font-medium hover:cursor-pointer' onClick={()=> setDropdownVisible(!dropdownVisible)}> 
             <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a className='mt-[1.8px]'> {userInfo?.name}</a> </div>
          {
           dropdownVisible && 
