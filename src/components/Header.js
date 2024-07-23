@@ -14,14 +14,21 @@ function Header() {
 
   const {userInfo, items}= useSelector(Store =>  Store.cartSlice)
   const [dropdownVisible, setDropdownVisible]=useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+
   const dispatch=useDispatch();
   const dropdownRef=useRef(null);
+  const toolTipRef=useRef(null);
   const length= items?.reduce((total, item) => total + (1) * item?.quantity, 0); 
 
   useEffect(()=>{
     const handleClickOutside=(event)=>{
       if(dropdownRef.current && !dropdownRef.current.contains(event.target)){
         setDropdownVisible(false)
+      }
+
+      if(toolTipRef.current && !toolTipRef.current.contains(event.target)){
+        setShowTooltip(false)
       }
     }
       document.addEventListener('mousedown', handleClickOutside);
@@ -77,11 +84,23 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
 
        <div className=' items-center flex'>
        <div className=' hidden md:flex mx-8 py-2'>
+        <Link to={'/search/:keyword'} className='flex'>
         <FontAwesomeIcon className='p-1 px-2 ' icon={faSearch} />  
         <p className='hover:text-orange-500 font-medium hover:cursor-pointer'>Search</p>
+        </Link>
         </div>
 
-        <div className='mx-8 py-2  hidden md:flex hover:text-orange-500 font-medium hover:cursor-pointer'><img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/helpcenter-7d90c0.svg"  className='px-2'/> <a>Help</a></div>
+       <div  ref={toolTipRef}>
+       <div className='mx-8 py-2  hidden md:flex hover:text-orange-500 font-medium hover:cursor-pointer' onClick={()=> setShowTooltip(!showTooltip)}>
+        <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/helpcenter-7d90c0.svg"  className='px-2' /> <a>Help
+      </a>
+      {showTooltip && (
+        <div className="absolute text-sm top-full ml-7 transform -translate-x-1/2 mt-1  w-[160px] p-2 border  hover:bg-gray-200  text-gray-800 bg-white text-center rounded shadow-lg">
+          Contact us:<p> +1-800-123-4567</p>
+        </div>
+      )}
+    </div> 
+       </div>
         {
           userInfo?.name ?        
            (<div  ref={dropdownRef}>
@@ -91,9 +110,9 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
           dropdownVisible && 
           <div className='absolute text-xs md:text-base top-[74px] md:top-[83px] ml-1 bg-white flex flex-col'>
             <Link to='/myorders' >
-            <button className=' border border-gray-300 p-2 hover:bg-gray-200 shadow-md'>My Orders</button>
+            <button className=' border  text-gray-800 bg-white text-center rounded p-2 hover:bg-gray-200 shadow-md'>My Orders</button>
             </Link>
-            <button className=' border border-gray-300 p-2 hover:bg-gray-200 shadow-md' onClick={()=>handleSignout()}>Sign Out</button>
+            <button className=' border  text-gray-800 bg-white text-center rounded p-2 hover:bg-gray-200 shadow-md' onClick={()=>handleSignout()}>Sign Out</button>
           </div>
          } 
          </div>)

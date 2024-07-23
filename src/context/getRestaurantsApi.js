@@ -5,8 +5,10 @@ import { ApiSlice } from "./ApiSlice";
 export const RestaurantApiSlice= ApiSlice.injectEndpoints({
     endpoints:(builder)=>({
         getRestaurants:builder.mutation({
-            query:()=>({
-                url: `${BASE_URL}/api/restaurants`
+            query:(keyword)=>({
+                url: `${BASE_URL}/api/restaurants`,
+                method:'POST',
+                params: keyword
             })
         }),
         getRestaurantById:builder.mutation({

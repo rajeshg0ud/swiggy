@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import MyOrders from './components/MyOrders';
+import Search from './components/Search';
 
 const AppLayout=()=>{
   return(
@@ -52,6 +53,10 @@ const appRoutes= createBrowserRouter([{
   {
     path:'/myorders',
     element:<MyOrders  />
+  },
+  {
+    path:'/search/:keyword',
+    element:<Search  />
   }]
 }])
 
