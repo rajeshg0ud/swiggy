@@ -108,11 +108,11 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
             <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg"   className='px-1 md:px-2'/><a className='mt-[1.8px]'> {userInfo?.name}</a> </div>
          {
           dropdownVisible && 
-          <div className='absolute text-xs md:text-base top-[74px] md:top-[83px] ml-1 bg-white flex flex-col'>
+          <div className='absolute text-xs md:text-base top-[57px] md:top-[83px] ml-1 bg-white flex flex-col'>
             <Link to='/myorders' >
-            <button className=' border  text-gray-800 bg-white text-center rounded p-2 hover:bg-gray-200 shadow-md'>My Orders</button>
+            <button className=' border  text-gray-800 bg-white text-center p-2 hover:bg-gray-200 shadow-md'>My Orders</button>
             </Link>
-            <button className=' border  text-gray-800 bg-white text-center rounded p-2 hover:bg-gray-200 shadow-md' onClick={()=>handleSignout()}>Sign Out</button>
+            <button className=' border  text-gray-800 bg-white text-center p-2 hover:bg-gray-200 shadow-md' onClick={()=>handleSignout()}>Sign Out</button>
           </div>
          } 
          </div>)

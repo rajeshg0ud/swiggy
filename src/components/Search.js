@@ -42,7 +42,7 @@ function Search() {
 
 
   return (
-    <div className='mt-[84px] md:mt-28 w-full'>
+    <div className='mt-[75px] md:mt-28 w-full'>
        <form onSubmit={(e)=> handleSubmit(e)} className=' w-full  flex justify-center'>
         <input type='text' placeholder='Search for Restaurants' onChange={(e)=> setSearchTerm(e.target.value)} className=' border p-3 text-black outline-none border-gray-400 rounded-sm w-[85%] md:w-[50%]'/>
         </form>
