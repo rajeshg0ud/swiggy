@@ -42,7 +42,7 @@ function Search() {
 
 
   return (
-    <div className='mt-[84px] md:mt-32 w-full'>
+    <div className='mt-[84px] md:mt-28 w-full'>
        <form onSubmit={(e)=> handleSubmit(e)} className=' w-full  flex justify-center'>
         <input type='text' placeholder='Search for Restaurants' onChange={(e)=> setSearchTerm(e.target.value)} className=' border p-3 text-black outline-none border-gray-400 rounded-sm w-[85%] md:w-[50%]'/>
         </form>
@@ -55,8 +55,7 @@ function Search() {
 
       :(
         <div className=' flex flex-col items-center md:w-[50%] mx-auto'>
-          <h1 className=' font-semibold border bg-gray-800 p-2 rounded-full my-1 text-sm text-white self-start ml-8 md:ml-10 '>Restaurants</h1>
-          <div className='flex flex-wrap justify-between'>
+       { data[0]?.info && <h1 className=' font-semibold border bg-gray-800 p-2 rounded-full my-1 text-sm text-white self-start ml-8 md:ml-10 '>Restaurants</h1>}          <div className='flex flex-wrap justify-between'>
             
                 {data?.map(res => (
                     <Link key={res.info.id} to={`/restaurant/${res.info.id}`}>
