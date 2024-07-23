@@ -83,7 +83,7 @@ function Cart() {
   }
 
   return (
-    <div className="mt-[60px] md:mt-[82px] container mx-auto p-4 bg-zinc-100 h-screen">
+    <div className="mt-[50px] md:mt-[82px] container mx-auto p-4 bg-zinc-100 h-screen">
       <div className="flex flex-col justify-center lg:flex-row lg:space-x-3">
         {items.length > 0 ? (
           <>
