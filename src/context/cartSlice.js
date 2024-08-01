@@ -90,35 +90,31 @@ const CartSlice= createSlice({
             
         },
         removeFromCart: (state, action) => {
-            // Ensure action.payload and itemId exist
-            if (!action.payload || !action.payload.itemId) {
+             if (!action.payload || !action.payload.itemId) {
                 console.error('Payload or itemId is missing');
                 return;
             }
         
             const { itemId } = action.payload;
         
-            // Check if state.items is not null or undefined
-            if (!state.items) {
+             if (!state.items) {
                 console.error('State items is missing');
                 return;
             }
         
-            // Map through items and modify quantities
-            const items = state.items.map((item) => {
-                if (item && item.itemId === itemId) { // Ensure item is not null
-                    console.log(itemId);
+             const items = state.items.map((item) => {
+                if (item && item.itemId === itemId) {  
+                    
                     if (item.quantity > 1) {
                         return { ...item, quantity: item.quantity - 1 };
                     } else {
                         return null;
                     }
                 }
-                return item; // Return item if it does not match
+                return item;  
             });
         
-            // Filter out null items
-            state.items = items.filter(item => item !== null);
+             state.items = items.filter(item => item !== null);
         
             saveState(state);
         },

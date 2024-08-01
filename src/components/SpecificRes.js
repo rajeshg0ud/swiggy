@@ -66,7 +66,7 @@ if (isError) return <div className="m-5 mt-24">{isError?.message}</div>;
               const existingItem = items.find(item => item.itemId === res?.card?.info?.id);
               const value = res?.card?.info?.price
                 ? `₹${Math.floor(res?.card?.info?.price / 100)}`
-                : Math.floor(res?.card?.info?.variantsV2?.variantGroups[0]?.variations[0]?.price);
+                : `₹${Math.floor(res?.card?.info?.variantsV2?.variantGroups[0]?.variations[0]?.price)}`;
 
               return (
                 <div className="flex justify-between md:m-5 max-w-3xl md:max-w-6xl px-4 py-9 md:p-10 border-b font-semibold" key={index}>

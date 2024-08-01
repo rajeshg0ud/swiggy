@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../context/cartSlice';
-import { CDN_URL } from './config';
 
 function AddButton({ resInfo, value, res }) {
   const dispatch = useDispatch();
